@@ -17,15 +17,10 @@
     <?php
     session_start();
     // Check if user is logged in
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: login.php");
-        exit();
-    }
+    
 
     // Database connection (replace with your credentials)
-    $pdo = new PDO("mysql:host=localhost;dbname=agc_archiv", "root", "", [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
+    require_once "../includes/config.php";
 
     // Fetch total documents
     $stmt = $pdo->query("SELECT COUNT(*) as total FROM documents");
