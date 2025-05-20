@@ -1,0 +1,6 @@
+.env 
+.htaccess
+*log
+vendror/
+uploads/*
+
