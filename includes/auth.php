@@ -2,7 +2,7 @@
 include '../includes/config.php';
 
 session_start();
-
+$phrase="";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];
@@ -29,10 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             setcookie('remember_me', '', time() - 3600, '/', '', true, true);
         }
 
-        // Redirection selon le rôle
-        $role = $user['role'];
-        echo "<script>Swal.fire('Succès', 'Connexion réussie !', 'success').then(() => window.location.href = 'dashboard.php?role=" . urlencode($role) . "');</script>";
+   // Redirection vers dashboard.php avec le rôle dans l'URL
+        header("Location: ../pages/dashboard.php" );
+        exit();
     } else {
+        $phrase = "Email/Mot de passe incorrect !";
         echo "<script>Swal.fire('Erreur', 'Email ou mot de passe incorrect.', 'error');</script>";
     }
 

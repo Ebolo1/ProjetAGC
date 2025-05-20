@@ -2,7 +2,7 @@
 include '../includes/config.php';
 
 session_start();
-
+$phrase="";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];
@@ -29,10 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             setcookie('remember_me', '', time() - 3600, '/', '', true, true);
         }
 
-        // Redirection selon le rôle
-        $role = $user['role'];
-        echo "<script>Swal.fire('Succès', 'Connexion réussie !', 'success').then(() => window.location.href = 'dashboard.php?role=" . urlencode($role) . "');</script>";
+   // Redirection vers dashboard.php avec le rôle dans l'URL
+        header("Location: ../pages/dashboard.php" );
+        exit();
     } else {
+        $phrase = "Email/Mot de passe incorrect !";
         echo "<script>Swal.fire('Erreur', 'Email ou mot de passe incorrect.', 'error');</script>";
     }
 
@@ -166,7 +167,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button class="w-1/2 py-2 font-semibold text-gray-700 bg-white rounded-full w-full">Login</button>
                     
                 </div>
-
+<!-- Affichage du message d'erreur -->
+                <?php if (!empty($phrase)): ?>
+                    <div class="flex w-full justify-center">
+                        <div class="w-[85%] bg-red-200 text-red-500 border border-red-500 rounded-sm p-2 text-center">
+                            <?php echo htmlspecialchars($phrase); ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
                
 
                 <!-- Login Form -->
@@ -212,45 +220,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
-    <script >
-        document.getElementById('toggle-password').addEventListener('click', function (e) {
-    const password = document.getElementById('password');
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-    this.setAttribute('name', type === 'password' ? 'eye-outline' : 'eye-off-outline');
-});
-
-document.querySelector('a[href="#"]').addEventListener('click', function (e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    if (email) {
-        Swal.fire({
-            title: 'Mot de passe oublié ?',
-            text: 'Un lien de réinitialisation vous sera envoyé si l\'email existe.',
-            input: 'text',
-            inputValue: email,
-            showCancelButton: true,
-            confirmButtonText: 'Envoyer',
-            cancelButtonText: 'Annuler',
-            preConfirm: (value) => {
-                if (!value) {
-                    Swal.showValidationMessage('Veuillez entrer un email.');
-                }
-                return value;
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = `login.php?forgot=true&email=${encodeURIComponent(result.value)}`;
-            }
-        });
-    } else {
-        Swal.fire('Erreur', 'Veuillez entrer un email d\'abord.', 'error');
-    }
-});
-
-document.getElementById('login-form').addEventListener('submit', function (e) {
-    // Ajouter une validation côté client si nécessaire
-});
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
