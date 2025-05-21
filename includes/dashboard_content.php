@@ -42,15 +42,15 @@ try {
 <div class="animate-slide-in">
     <h2 class="text-3xl font-semibold text-black mb-6">Tableau de bord</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-blue-600 text-white p-6 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+        <div class="bg-blue-200 text-blue-400 p-6 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 border border-blue-400">
             <h3 class="text-lg font-medium flex items-center"><ion-icon name="document-outline" class="mr-2"></ion-icon> Total des documents</h3>
             <p class="text-3xl font-bold"><?php echo $totalDocuments; ?></p>
         </div>
-        <div class="bg-green-600 text-white p-6 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+        <div class="bg-green-200 text-green-400 p-6 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 border border-green-400">
             <h3 class="text-lg font-medium flex items-center"><ion-icon name="time-outline" class="mr-2"></ion-icon> Documents récents</h3>
             <p class="text-3xl font-bold"><?php echo count($recentDocuments); ?></p>
         </div>
-        <div class="bg-blue-600 text-white p-6 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+        <div class="bg-red-200 text-red-400 p-6 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 border border-red-400">
             <h3 class="text-lg font-medium flex items-center"><ion-icon name="pulse-outline" class="mr-2"></ion-icon> Activité ce mois</h3>
             <p class="text-3xl font-bold"><?php echo array_sum($data_added); ?></p>
         </div>

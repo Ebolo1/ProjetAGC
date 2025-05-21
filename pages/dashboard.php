@@ -127,7 +127,7 @@
             document.getElementById('mainContent').innerHTML = data;
             if (section === 'dashboard') {
                 initializeDashboard();
-            } else if (section === 'archives' || section === 'users' || section === 'logs') {
+            } else if (section === 'archive' || section === 'users' || section === 'logs') {
                 initializeDataTable();
             }
         })
@@ -151,7 +151,7 @@
                 searching: true,
                 ordering: true,
                 pageLength: 5,
-                language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json' }
+                // language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json' }
             });
         }
 
