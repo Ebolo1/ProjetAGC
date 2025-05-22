@@ -42,7 +42,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="min-h-screen bg-gray-100">
     <?php
     session_start();
     if (!isset($_SESSION['user_id'])) {
