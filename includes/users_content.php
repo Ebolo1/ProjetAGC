@@ -109,7 +109,7 @@ try {
 }
 ?>
 <div class="animate-slide-in">
-    <h2 class="mb-6 text-3xl font-semibold text-black">Gestion des utilisateurs</h2>
+    <h2 class="mb-6 text-3xl font-semibold text-white">Gestion des utilisateurs</h2>
 
     <!-- Formulaire pour ajouter un utilisateur -->
     <div class="p-6 mb-8 bg-white rounded-lg shadow-md">
