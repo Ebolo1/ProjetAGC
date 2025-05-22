@@ -14,80 +14,32 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-       body {
-    font-family: 'Inter', sans-serif;
-    margin: 0; /* Remove default margin */
-}
-
-.wave {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 200px;
-    background: #3b82f6;
-    border-bottom-left-radius: 50% 100px;
-    border-bottom-right-radius: 50% 100px;
-    z-index: 0;
-    overflow: hidden;
-}
-
-header {
-    position: fixed; /* Fix navbar at the top */
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 20; /* Ensure navbar is above other content */
-    background: #000; /* Keep background consistent */
-}
-
-aside {
-    position: fixed; /* Fix sidebar on the left */
-    top: 0; /* Align with top of viewport */
-    bottom: 0; /* Extend to bottom */
-    width: 16rem; /* Match w-64 (64 * 0.25rem = 16rem) */
-    z-index: 10; /* Ensure sidebar is above main content but below navbar */
-    background: #000; /* Keep background consistent */
-    overflow-y: auto; /* Allow scrolling within sidebar if content overflows */
-}
-
-main {
-    margin-left: 16rem; /* Match sidebar width (w-64) */
-    margin-top: 4rem; /* Match navbar height (adjust based on your navbar height) */
-    padding: 2rem; /* Match p-8 */
-    overflow-y: auto; /* Ensure main content is scrollable */
-    height: calc(100vh - 4rem); /* Full height minus navbar height */
-}
-
-/* Existing styles remain unchanged */
-.animate-slide-in {
-    animation: slideIn 0.5s ease-in-out;
-}
-
-@keyframes slideIn {
-    from { transform: translateY(-20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.modal {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.modal-hidden {
-    opacity: 0;
-    transform: translateY(-100px);
-    pointer-events: none;
-}
-
-.modal-visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.nav-link.active {
-    background-color: #2563eb;
-}
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .animate-slide-in {
+            animation: slideIn 0.5s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .modal {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .modal-hidden {
+            opacity: 0;
+            transform: translateY(-100px);
+            pointer-events: none;
+        }
+        .modal-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .nav-link.active {
+            background-color: #2563eb;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gray-100">
@@ -107,9 +59,7 @@ main {
     $email = $user['email'] ?? 'email@example.com';
     $role = $user['role'] ?? 'user';
     ?>
-    <div class="wave"></div>
-    <div class="absolute inset-0 h-screen bg-center bg-cover" style="background-image: url('../image/image.webp'); opacity: 0.1;"></div>
-    <div class="relative z-10 ">
+    <div class="flex flex-col h-screen">
         <!-- Navbar -->
         <header class="flex items-center justify-between p-4 text-white bg-black shadow-md">
             <h1 class="text-2xl font-bold text-blue-400">AGC Archiv' Secure</h1>
@@ -121,15 +71,15 @@ main {
                 </button>
                 <div id="profileDropdown" class="absolute right-0 hidden w-48 mt-2 text-black bg-white rounded-lg shadow-lg animate-slide-in">
                     <a href="#" id="editProfileBtn" class="flex items-center block px-4 py-2 hover:bg-gray-100"><ion-icon name="create-outline" class="mr-2"></ion-icon> Modifier le profil</a>
-                    <a href="../dist/logout.php" class="flex items-center block px-4 py-2 text-red-600 hover:bg-gray-100"><ion-icon name="log-out-outline" class="mr-2"></ion-icon> Déconnexion</a>
+                    <a href="logout.php" class="flex items-center block px-4 py-2 text-red-600 hover:bg-gray-100"><ion-icon name="log-out-outline" class="mr-2"></ion-icon> Déconnexion</a>
                 </div>
             </div>
         </header>
 
-        <div class="flex ">
+        <div class="flex flex-1">
             <!-- Sidebar -->
             <aside class="w-64 text-white bg-black shadow-md">
-                <nav class="mt-24">
+                <nav class="mt-6">
                     <ul>
                         <li><a href="#" data-section="dashboard" class="flex items-center px-4 py-2 text-white bg-blue-600 nav-link hover:bg-blue-700 hover:border-l-4 hover:border-red-700"><ion-icon name="home-outline" class="mr-2"></ion-icon> Tableau de bord</a></li>
                         <li><a href="#" data-section="archive" class="flex items-center px-4 py-2 text-white nav-link hover:bg-blue-700 hover:border-l-4 hover:border-red-700"><ion-icon name="folder-outline" class="mr-2"></ion-icon> Gestion des archives</a></li>
@@ -138,7 +88,7 @@ main {
                             <li><a href="#" data-section="users" class="flex items-center px-4 py-2 text-white nav-link hover:bg-blue-700 hover:border-l-4 hover:border-red-700"><ion-icon name="people-outline" class="mr-2"></ion-icon> Gestion des utilisateurs</a></li>
                             <li><a href="#" data-section="logs" class="flex items-center px-4 py-2 text-white nav-link hover:bg-blue-700 hover:border-l-4 hover:border-red-700"><ion-icon name="document-text-outline" class="mr-2"></ion-icon> Journal des actions</a></li>
                         <?php endif; ?>
-                        <li><a href="../dist/logout.php" class="flex items-center px-4 py-2 text-red-500 hover:bg-red-700 hover:text-white hover:border-l-4 hover:border-blue-700 "><ion-icon name="log-out-outline" class="mr-2"></ion-icon> Déconnexion</a></li>
+                        <li><a href="../dist/logout.php" class="flex items-center px-4 py-2 text-red-500 hover:bg-red-700 hover:text-white hover:border-l-4 hover:border-blue-700"><ion-icon name="log-out-outline" class="mr-2"></ion-icon> Déconnexion</a></li>
                     </ul>
                 </nav>
             </aside>

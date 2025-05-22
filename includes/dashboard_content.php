@@ -84,7 +84,7 @@ try {
 ?>
 
 <div class="animate-slide-in">
-    <h2 class="mb-6 text-3xl font-semibold text-white">Tableau de bord</h2>
+    <h2 class="mb-6 text-3xl font-semibold text-black">Tableau de bord</h2>
 
     <!-- Cartes pour le total, documents récents et activité -->
     <div class="animate-slide-in">
